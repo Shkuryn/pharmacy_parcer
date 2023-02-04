@@ -40,30 +40,42 @@ def psp_search
   # Fetch the HTML document
   url = 'https://psp.ge/catalogsearch/result?q=Solgar'
   # html_doc = Nokogiri::HTML(open(url))
-  #
-  # # Search for elements by CSS selector
-  # html_doc.search('h1').each do |element|
-  #   puts element.text
-  # end
 
   # Create a new Selenium driver
   driver = Selenium::WebDriver.for :chrome
-
-  # Navigate to the website
   driver.navigate.to url
+  element = driver.find_element(:tag_name, 'header')
+  driver.action.context_click(element).perform
 
-  elements = driver.find_elements(:class, 'product')
+  # Locate all elements within the context menu
+  # context_menu_items = driver.find_elements(:css, "ul[role='menu'] li")
+  context_menu_items = driver.find_elements(:class, "context-menu")
 
-  # Print the element's text
-  elements.each do |element|
-    # Print the element's text
-    puts element.text
-
+  # Retrieve the text of each context menu item
+  context_menu_items.each do |item|
+    puts item.text
   end
 
+
+  sleep 10
+  # Locate the 'Translate to' option
+  # translate_to_option = driver.find_element(:xpath, "//*[text()='Translate to english']")
+  #
+  # # Click the 'Translate to' option
+  # driver.action.click(translate_to_option).perform
+
+
+  # elements = driver.find_elements(:class, 'product')
+  #
+  # # Print the element's text
+  # elements.each do |element|
+  #   # Print the element's text
+  #   puts element.text
+  # end
+
   # Close the browser
-  driver.quit
+  # driver.quit
 end
 
-aversi_search
-# psp_search
+# aversi_search
+psp_search
