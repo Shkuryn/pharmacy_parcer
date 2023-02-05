@@ -28,6 +28,6 @@ if __FILE__ == $PROGRAM_NAME
   end
   AversiSearcher.new(drug).search
   PspSearcher.new(drug).search
-  display_drugs
+  Drug.display_drugs
 end
 
