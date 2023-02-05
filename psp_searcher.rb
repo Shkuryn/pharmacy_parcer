@@ -22,7 +22,7 @@ class PspSearcher
     drug = Drug.new
     drug.title = array[0, 6].join(' ')
     drug.amount = array[-2]
-    drug.amount_with_discount = array[-3]
+    drug.amount_with_discount = array[-3].gsub(/[^\d.]/, '')
     drug.pharmacy = PHARMACY
   end
 

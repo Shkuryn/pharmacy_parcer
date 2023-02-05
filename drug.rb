@@ -15,6 +15,7 @@ class Drug < Array
 
   def self.display_drugs
     rows = []
+    all.sort_by!(&:amount_with_discount)
     all.each do |drug|
       rows << [drug.title, drug.amount, drug.amount_with_discount, drug.pharmacy]
     end
