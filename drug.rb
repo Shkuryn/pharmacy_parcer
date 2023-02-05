@@ -16,10 +16,10 @@ class Drug < Array
   def self.display_drugs
     rows = []
     all.sort_by! do |drug|
-      if drug.amount.end_with?("Gel")
-        drug.amount_with_discount.gsub(" Gel", "").to_f * 100
+      if drug.amount.end_with?('Gel')
+        drug.amount_with_discount.gsub(' Gel', '').to_f * 100
       else
-        drug.amount_with_discount.gsub("₾", "").to_f * 100
+        drug.amount_with_discount.gsub('₾', '').to_f * 100
       end
     end
     all.each do |drug|
