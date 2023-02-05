@@ -12,8 +12,18 @@ require './translate'
 # PspSearcher class performs a search for a given drug name on a specified website
 # using Selenium and outputs the resulting elements
 class PspSearcher
+  @@drugs = []
   def initialize(drug_name)
     @drug_name = drug_name
+  end
+
+  def save_drug(text)
+    array = text.to_s.split
+    drug = Drug.new
+    drug.title = array[0, 6].join(' ')
+    drug.amount = array[-2]
+    drug.amount_with_discount = array[-3]
+    @@drugs << drug
   end
 
   def search
@@ -24,13 +34,21 @@ class PspSearcher
     elements = driver.find_elements(:class, 'product')
 
     elements.each do |element|
-      puts "перевожу #{element.text}"
       gt = GoogleTranslator.new(element.text)
       gt.translate
-      puts "перевод #{gt.text_to}"
+      save_drug(gt.text_to)
     end
+
+    display_drugs
 
     driver.quit
   end
 
+  def display_drugs
+    @@drugs.each do |drug|
+      puts "Title: #{drug.title}"
+      puts "Amount: #{drug.amount}"
+      puts "Amount with discount: #{drug.amount_with_discount}"
+    end
+  end
 end
