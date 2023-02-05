@@ -19,7 +19,15 @@ def display_drugs
   end
 end
 
-drug = 'dirosat'
-AversiSearcher.new(drug).search
-PspSearcher.new(drug).search
-display_drugs
+if __FILE__ == $PROGRAM_NAME
+  if ARGV.count < 1
+    puts 'please run program with param'
+    return
+  else
+    drug = ARGV[0]
+  end
+  AversiSearcher.new(drug).search
+  PspSearcher.new(drug).search
+  display_drugs
+end
+
