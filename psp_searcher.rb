@@ -12,6 +12,7 @@ require './translate'
 # PspSearcher class performs a search for a given drug name on a specified website
 # using Selenium and outputs the resulting elements
 class PspSearcher
+  PHARMACY = 'PSP'
   def initialize(drug_name)
     @drug_name = drug_name
   end
@@ -22,6 +23,7 @@ class PspSearcher
     drug.title = array[0, 6].join(' ')
     drug.amount = array[-2]
     drug.amount_with_discount = array[-3]
+    drug.pharmacy = PHARMACY
   end
 
   def search
@@ -37,16 +39,6 @@ class PspSearcher
       save_drug(gt.text_to)
     end
 
-    display_drugs
-
     driver.quit
-  end
-
-  def display_drugs
-    Drug.all.each do |drug|
-      puts "Title: #{drug.title}"
-      puts "Amount: #{drug.amount}"
-      puts "Amount with discount: #{drug.amount_with_discount}"
-    end
   end
 end

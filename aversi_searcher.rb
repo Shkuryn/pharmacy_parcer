@@ -9,9 +9,9 @@ require 'openssl'
 require './drug'
 
 class AversiSearcher
+  PHARMACY = 'Aversi'
   def initialize(drug_name)
     @drug_name = drug_name
-    search
   end
 
   def save_drug(details_text)
@@ -24,6 +24,7 @@ class AversiSearcher
     drug.amount = doc.at_css('.amount').content
     drug.amount_with_discount = doc.css('ins .amount').text.gsub(/[^\d.]/, '')
     drug.country = doc.css('div strong')[0].content
+    drug.pharmacy = PHARMACY
   end
 
   def search

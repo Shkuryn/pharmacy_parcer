@@ -2,7 +2,7 @@
 
 class Drug < Array
   @@all = []
-  attr_accessor :title, :amount, :amount_with_discount, :country
+  attr_accessor :title, :amount, :amount_with_discount, :country, :pharmacy
 
   def initialize
     @@all << self
