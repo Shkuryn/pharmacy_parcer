@@ -24,6 +24,7 @@ class AversiSearcher
     drug.amount_with_discount = doc.css('ins .amount').text.gsub('₾', '').to_f
     # drug.country = doc.css('div strong')[0].content
     drug.pharmacy = PHARMACY
+    drug
   end
 
   def search

@@ -23,6 +23,7 @@ class PspSearcher
     drug.title = array[0, 6].join(' ')
     drug.amount_with_discount = array[-3].gsub(' Gel', '').to_f
     drug.pharmacy = PHARMACY
+    drug
   end
 
   def search

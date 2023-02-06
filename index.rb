@@ -30,4 +30,3 @@ if __FILE__ == $PROGRAM_NAME
   PspSearcher.new(drug).search
   Drug.display_drugs
 end
-
