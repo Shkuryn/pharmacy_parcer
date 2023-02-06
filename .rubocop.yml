@@ -1,0 +1,46 @@
+require:
+  - rubocop-rspec
+
+
+Style/Encoding:
+  Enabled: false
+Style/LambdaCall:
+  Enabled: false
+Style/Documentation:
+  Description: Document classes and non-namespace modules.
+  Enabled: false
+Style/KeywordParametersOrder:
+  Enabled: false
+Style/MissingRespondToMissing:
+  Enabled: false
+
+Metrics/BlockLength:
+  Exclude:
+    - 'spec/**/*'
+
+NestedGroups:
+  Exclude:
+    - 'spec/**/*'
+
+RSpec/NamedSubject:
+  Exclude:
+    - 'spec/**/*'
+
+RSpec/DescribeClass:
+  Exclude:
+    - 'spec/**/*'
+
+RSpec/ExpectActual:
+  Exclude:
+    - 'spec/**/*'
+
+Layout/LineLength:
+  Exclude:
+    - 'spec/**/*'
+
+RSpec/FilePath:
+  Exclude:
+    - 'spec/**/*'
+
+Metrics/MethodLength:
+  Exclude:
