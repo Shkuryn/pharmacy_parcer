@@ -21,8 +21,7 @@ class PspSearcher
     array = text.to_s.split
     drug = Drug.new
     drug.title = array[0, 6].join(' ')
-    drug.amount = array[-2]
-    drug.amount_with_discount = array[-3].gsub(/[^\d.]/, '')
+    drug.amount_with_discount = array[-3].gsub(' Gel', '').to_f
     drug.pharmacy = PHARMACY
   end
 
