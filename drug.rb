@@ -13,6 +13,18 @@ class Drug < Array
     @@all
   end
 
+  def self.first
+    @@all.first
+  end
+
+  def self.last
+    @@all.last
+  end
+
+  def self.count
+    @@all.count
+  end
+
   def self.display_drugs
     rows = []
     all.sort_by!(&:amount_with_discount)
