@@ -1,7 +1,6 @@
 require:
   - rubocop-rspec
 
-
 Style/Encoding:
   Enabled: false
 Style/LambdaCall:
@@ -44,3 +43,7 @@ RSpec/FilePath:
 
 Metrics/MethodLength:
   Exclude:
+
+AllCops:
+  Exclude:
+    - 'spec/**/*'

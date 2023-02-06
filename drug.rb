@@ -1,28 +1,29 @@
 # frozen_string_literal: true
 
 require 'terminal-table'
+
 class Drug < Array
-  @@all = []
   attr_accessor :title, :amount_with_discount, :pharmacy
 
-  def initialize
-    @@all << self
+  def self.all
+    @all ||= []
   end
 
-  def self.all
-    @@all
+  def initialize
+    super
+    self.class.all << self
   end
 
   def self.first
-    @@all.first
+    all.first
   end
 
   def self.last
-    @@all.last
+    all.last
   end
 
   def self.count
-    @@all.count
+    all.count
   end
 
   def self.display_drugs
