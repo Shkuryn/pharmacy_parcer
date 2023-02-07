@@ -1,6 +1,11 @@
 # frozen_string_literal: true
 
-require 'ferrum'
+require 'open-uri'
+require 'nokogiri'
+require 'selenium-webdriver'
+require 'uri'
+require 'net/http'
+require 'openssl'
 require './drug'
 require './translate'
 
@@ -23,11 +28,10 @@ class PspSearcher
 
   def search
     url = "https://psp.ge/catalogsearch/result?q=#{@drug_name}"
-    browser = Ferrum::Browser.new(headless: true)
+    driver = Selenium::WebDriver.for :chrome
+    driver.navigate.to url
 
-    browser.goto(url)
-
-    elements = browser.css('.product')
+    elements = driver.find_elements(:class, 'product')
 
     elements.each do |element|
       gt = GoogleTranslator.new(element.text)
@@ -35,6 +39,6 @@ class PspSearcher
       save_drug(gt.text_to)
     end
 
-    browser.quit
+    driver.quit
   end
 end

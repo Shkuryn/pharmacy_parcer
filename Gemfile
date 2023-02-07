@@ -5,8 +5,10 @@ source 'https://rubygems.org'
 ruby '2.6.3'
 
 group :development do
+  gem 'ferrum'
   gem 'dotenv'
   gem 'google-cloud-translate-v2', '~> 0.3.0'
+  gem 'poltergeist'
   gem 'rubocop'
   gem 'rubocop-rspec'
   gem 'terminal-table'
