@@ -26,6 +26,6 @@ class GoogleTranslator
 
   def translate
     translate = Google::Cloud::Translate::V2.new(key: API_KEY)
-    @text_to = translate.translate(@text_from, to: 'ru')
+    @text_to = translate.translate(text_from, to: 'ru')
   end
 end

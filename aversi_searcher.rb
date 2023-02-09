@@ -29,7 +29,7 @@ class AversiSearcher
   end
 
   def search
-    doc = Nokogiri::HTML(URI.open("https://www.aversi.ge/en/aversi/act/searchMedicine/?kw_en=#{@drug_name}"))
+    doc = Nokogiri::HTML(URI.open("https://www.aversi.ge/en/aversi/act/searchMedicine/?kw_en=#{drug_name}"))
     product_elements = doc.css('.product')
 
     product_elements.each do |product|
