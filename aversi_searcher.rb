@@ -17,12 +17,12 @@ class AversiSearcher
 
   def save_drug(details_text)
     doc = Nokogiri::HTML(details_text)
-    title = doc.at_css('.product-title')
+    title = doc.at_css('.product-title').inner_html
     amount = doc.css('ins .amount').text.gsub('₾', '').to_f
     return if amount.zero?
 
     drug = Drug.new
-    drug.title = title.content
+    drug.title = title
     drug.amount_with_discount = amount
     drug.pharmacy = PHARMACY
     drug
