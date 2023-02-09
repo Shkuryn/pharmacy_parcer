@@ -29,7 +29,15 @@ class PspSearcher
     browser = Ferrum::Browser.new(headless: true)
     page_number = 0
 
-    while success do
+    processing_result(browser, page_number, success)
+
+    browser.quit
+  end
+
+  private
+
+  def processing_result(browser, page_number, success)
+    while success
       page_number += 1
       url = "https://psp.ge/catalogsearch/result?q=#{drug_name}&page=#{page_number}"
       browser.goto(url)
@@ -37,19 +45,21 @@ class PspSearcher
       elements = html_doc.css('.product')
 
       counter = 1
-      elements.each do |element|
-        title = element.xpath("//*[@id='app']/div[1]/div/div/div/div[3]/div[2]/div[#{counter}]/a/div[2]").inner_text
-        price = element.xpath("//*[@id='app']/div[1]/div/div/div/div[3]/div[2]/div[#{counter}]/a/div[3]/div[1]")
-        .inner_text.gsub('₾ ', '').to_f
-
-        gt = GoogleTranslator.new(title)
-        gt.translate
-        save_drug(gt.text_to, price)
-        counter += 1
-      end
+      process_element(counter, elements)
       success = false if elements.count < 20
     end
+  end
 
-    browser.quit
+  def process_element(counter, elements)
+    elements.each do |element|
+      title = element.xpath("//*[@id='app']/div[1]/div/div/div/div[3]/div[2]/div[#{counter}]/a/div[2]").inner_text
+      price = element.xpath("//*[@id='app']/div[1]/div/div/div/div[3]/div[2]/div[#{counter}]/a/div[3]/div[1]")
+                     .inner_text.gsub('₾ ', '').to_f
+
+      gt = GoogleTranslator.new(title)
+      gt.translate
+      save_drug(gt.text_to, price)
+      counter += 1
+    end
   end
 end
