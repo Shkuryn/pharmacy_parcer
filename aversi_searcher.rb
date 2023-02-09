@@ -2,7 +2,6 @@
 
 require 'open-uri'
 require 'nokogiri'
-require 'selenium-webdriver'
 require 'uri'
 require 'net/http'
 require 'openssl'
@@ -10,6 +9,8 @@ require './drug'
 
 class AversiSearcher
   PHARMACY = 'Aversi'
+  attr_reader :drug_name
+
   def initialize(drug_name)
     @drug_name = drug_name
   end
@@ -17,12 +18,12 @@ class AversiSearcher
   def save_drug(details_text)
     doc = Nokogiri::HTML(details_text)
     title = doc.at_css('.product-title')
-    return if title.nil?
+    amount = doc.css('ins .amount').text.gsub('₾', '').to_f
+    return if amount.zero?
 
     drug = Drug.new
     drug.title = title.content
-    drug.amount_with_discount = doc.css('ins .amount').text.gsub('₾', '').to_f
-    # drug.country = doc.css('div strong')[0].content
+    drug.amount_with_discount = amount
     drug.pharmacy = PHARMACY
     drug
   end

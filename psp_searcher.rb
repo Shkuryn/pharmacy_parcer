@@ -8,22 +8,27 @@ require './translate'
 # using Selenium and outputs the resulting elements
 class PspSearcher
   PHARMACY = 'PSP'
+  attr_reader :drug_name
+
   def initialize(drug_name)
     @drug_name = drug_name
   end
 
   def save_drug(text)
-    puts text
     array = text.to_s.split
+    title = array[0, 5].join(' ')
+    amount = array[-3].gsub(' Gel', '').to_f
+    return if amount.zero?
+
     drug = Drug.new
-    drug.title = array[0, 5].join(' ')
-    drug.amount_with_discount = array[-3].gsub(' Gel', '').to_f
+    drug.title = title
+    drug.amount_with_discount = amount
     drug.pharmacy = PHARMACY
     drug
   end
 
   def search
-    url = "https://psp.ge/catalogsearch/result?q=#{@drug_name}"
+    url = "https://psp.ge/catalogsearch/result?q=#{drug_name}"
     browser = Ferrum::Browser.new(headless: true)
 
     browser.goto(url)
