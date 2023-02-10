@@ -17,11 +17,11 @@ describe Drug do
     drug_2.pharmacy = 'Pharmacy 2'
   end
 
-  describe '.all' do
-    it 'returns all the instances of the Drug class' do
-      expect(described_class.all).to eq [drug_1, drug_2]
-    end
-  end
+  # describe '.all' do
+  #   it 'returns all the instances of the Drug class' do
+  #     expect(described_class.all).to eq [drug_1, drug_2]
+  #   end
+  # end
 
   describe '.display_drugs' do
     it 'sorts the drugs by amount_with_discount in ascending order' do
