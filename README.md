@@ -1,5 +1,5 @@
 # pharmacy_parcer
-parser for Georgian pharmacies Psp && Aversi
+parser for Georgian pharmacies Psp & Aversi
 
 ## Installation
 
